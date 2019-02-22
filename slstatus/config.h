@@ -57,12 +57,12 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 				/* function format		argument */
-				{ keyboard_indicators, "[%s]", "c?n?" },
-				{ wifi_essid, "[%s]","wlp3s0" },
-				{ ipv4, "[LAN IP %s] ", "enp0s25" },
-				{ ram_perc, "[R:%s%]",NULL },
-				{ cpu_perc, "[C:%s%]",NULL },
-				{ temp, "[%s°C]","/sys/class/thermal/thermal_zone0/temp" },
-				{ battery_perc,"[B:%s%]", "BAT0" },
-				{ datetime,	"[%s]","%r" }
+				{ keyboard_indicators,"[%s]","c?n?" },
+				{ wifi_essid,"[%s]","wlp3s0" },
+				{ ipv4,"[%s]", "enp0s25" },
+				{ ram_perc,"[R:%s%]",NULL },
+				{ cpu_perc,"[C:%s%]",NULL },
+				{ temp,"[%s°C]","/sys/class/thermal/thermal_zone0/temp" },
+				{ battery_perc,"[B:%s%]","BAT0" },
+				{ datetime,"[%s]","%r" }
 };

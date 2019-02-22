@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=14:antialias=true:autohint=true";
+static char *font = "Mono:pixelsize=14:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
@@ -81,7 +81,7 @@ char *termname = "st-256color";
  *	stty tabs
  */
 unsigned int tabspaces = 8;
-#include "/home/nith/suckless/st/themes/default.h"
+#include "/home/nith/suckless/st/themes/nord.h"
 /*
  * Default shape of cursor
  * 2: Block ("█")

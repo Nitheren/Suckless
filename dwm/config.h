@@ -3,14 +3,15 @@
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 0;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 0;        /* 0 means bottom bar */
-static const unsigned int gappx     = 10;       /* gap pixel between windows */
+static const int topbar             = 1;        /* 0 means bottom bar */
+static const unsigned int gappx     = 5;       /* gap pixel between windows */
 static const char *fonts[]          = { "monospace:size=11" };
 static const char dmenufont[]       = "monospace:size=11";
 
 /*#include "/home/nith/suckless/dwm/themes/light-and-black.h" */
 /*#include "/home/nith/suckless/dwm/themes/default-theme.h"*/
-#include "/home/nith/suckless/dwm/themes/default.h" 
+/*#include "/home/nith/suckless/dwm/themes/default.h"*/ 
+#include "/home/nith/suckless/dwm/themes/gray.h"
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
@@ -27,7 +28,7 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 #include "tcl.c"
@@ -60,19 +61,18 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_white, "-nf", col_black, "-sb", col_black, "-sf", col_white, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_gray5, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st","-e","tmux", NULL };
 static const char *cmdbrightnessup[]  = { "xbacklight", "-inc", "10", NULL };
 static const char *cmdbrightnessdown[]  = { "xbacklight", "-dec", "10", NULL };
 static const char *cmdsoundup[]  = { "amixer", "-q", "sset", "Master", "5%+", NULL };
 static const char *cmdsounddown[]  = { "amixer", "-q", "sset", "Master", "5%-", NULL };
-static const char *cmdsoundtoggle[] = { "amixer", "-q", "-D","pulse", "sset", "Master", "toggle", NULL };
+static const char *cmdsoundtoggle[] = { "amixer", "-q", "sset", "Master", "toggle", NULL };
 static const char *cmdbrowser[] = { "tabbed","-d","-c","surf","-e", NULL };
 static const char *lock[] = { "slock", NULL };
-static const char *import[] = { "import","-window","root","screenshot.png",NULL };
 static const char *ranger[] = { "st", "-e", "ranger", NULL };
 static const char *news[] = { "st", "-e", "newsboat", NULL };
-static const char *music[] = { "st", "-e", "ncmpcpp", NULL };
+static const char *music[] = { "st", "-e", "cmus", NULL };
 
 static Key keys[] = {
 				/* modifier                     key        function        argument */
@@ -83,7 +83,6 @@ static Key keys[] = {
 				{ MODKEY|ShiftMask,						  XK_w,	   	 spawn,					 {.v = cmdbrowser } },
 				{ MODKEY|ShiftMask,							XK_m,	   	 spawn,					 {.v = music } },
 				{ MODKEY|ShiftMask,							XK_n,	   	 spawn,					 {.v = news } },
-				{ MODKEY|ShiftMask,							XK_Print,  spawn,		 			 {.v = import } },
 
 				{ MODKEY,                       XK_b,      togglebar,      {0} },
 				{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
