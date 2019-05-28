@@ -8,15 +8,16 @@ static const char unknown_str[] = "n/a";
 
 /* maximum output string length */
 #define MAXLEN 2048
+
 /*
  * function            description                     argument (example)
  *
  * battery_perc        battery percentage              battery name (BAT0)
- *                                                     NULL on OpenBSD
+ *                                                     NULL on OpenBSD/FreeBSD
  * battery_state       battery charging state          battery name (BAT0)
- *                                                     NULL on OpenBSD
+ *                                                     NULL on OpenBSD/FreeBSD
  * battery_remaining   battery remaining HH:MM         battery name (BAT0)
- *                                                     NULL on OpenBSD
+ *                                                     NULL on OpenBSD/FreeBSD
  * cpu_perc            cpu usage in percent            NULL
  * cpu_freq            cpu frequency in MHz            NULL
  * datetime            date and time                   format string (%F %T)
@@ -30,13 +31,15 @@ static const char unknown_str[] = "n/a";
  * ipv4                IPv4 address                    interface name (eth0)
  * ipv6                IPv6 address                    interface name (eth0)
  * kernel_release      `uname -r`                      NULL
- * keyboard_indicators caps/num lock indicators        format string (c?n?) see keyboard_indicators.c
+ * keyboard_indicators caps/num lock indicators        format string (c?n?)
+ *                                                     see keyboard_indicators.c
  * keymap              layout (variant) of current     NULL
  *                     keymap
  * load_avg            load average                    NULL
  * netspeed_rx         receive network speed           interface name (wlan0)
  * netspeed_tx         transfer network speed          interface name (wlan0)
- * num_files           number of files in a directory  path (/home/foo/Inbox/cur)
+ * num_files           number of files in a directory  path
+ *                                                     (/home/foo/Inbox/cur)
  * ram_free            free memory in GB               NULL
  * ram_perc            memory usage in percent         NULL
  * ram_total           total memory size in GB         NULL
@@ -46,8 +49,11 @@ static const char unknown_str[] = "n/a";
  * swap_perc           swap usage in percent           NULL
  * swap_total          total swap size in GB           NULL
  * swap_used           used swap in GB                 NULL
- * temp                temperature in degree celsius   sensor file 
- *		       (/sys/class/thermal/...) NULL on OpenBSD
+ * temp                temperature in degree celsius   sensor file
+ *                                                     (/sys/class/thermal/...)
+ *                                                     NULL on OpenBSD
+ *                                                     thermal zone on FreeBSD
+ *                                                     (tz0, tz1, etc.)
  * uid                 UID of current user             NULL
  * uptime              system uptime                   NULL
  * username            username of current user        NULL
@@ -56,13 +62,10 @@ static const char unknown_str[] = "n/a";
  * wifi_essid          WiFi ESSID                      interface name (wlan0)
  */
 static const struct arg args[] = {
-				/* function format		argument */
-				{ keyboard_indicators,"[%s]","c?n?" },
-				{ wifi_essid,"[%s]","wlp3s0" },
-				{ ipv4,"[%s]", "enp0s25" },
-				{ ram_perc,"[R:%s%]",NULL },
-				{ cpu_perc,"[C:%s%]",NULL },
-				{ temp,"[%s°C]","/sys/class/thermal/thermal_zone0/temp" },
-				{ battery_perc,"[B:%s%]","BAT0" },
-				{ datetime,"[%s]","%r" }
+	/* function format          argument */
+	{ battery_state,"[B:%s",	NULL },
+	{ battery_perc, "%s]",		NULL },
+	{ vol_perc, 		"[V:%s]",	"/dev/mixer" },
+	{ wifi_essid,		"[%s]",		"iwm0" },	
+	{ datetime, 		"[%s]",		"%F %T" },
 };

@@ -6,27 +6,27 @@ include config.mk
 
 REQ = util
 COM =\
-		 components/battery\
-		 components/cpu\
-		 components/datetime\
-		 components/disk\
-		 components/entropy\
-		 components/hostname\
-		 components/ip\
-		 components/kernel_release\
-		 components/keyboard_indicators\
-		 components/keymap\
-		 components/load_avg\
-		 components/netspeeds\
-		 components/num_files\
-		 components/ram\
-		 components/run_command\
-		 components/swap\
-		 components/temperature\
-		 components/uptime\
-		 components/user\
-		 components/volume\
-		 components/wifi
+	components/battery\
+	components/cpu\
+	components/datetime\
+	components/disk\
+	components/entropy\
+	components/hostname\
+	components/ip\
+	components/kernel_release\
+	components/keyboard_indicators\
+	components/keymap\
+	components/load_avg\
+	components/netspeeds\
+	components/num_files\
+	components/ram\
+	components/run_command\
+	components/swap\
+	components/temperature\
+	components/uptime\
+	components/user\
+	components/volume\
+	components/wifi
 
 all: slstatus
 
@@ -49,8 +49,8 @@ dist:
 	rm -rf "slstatus-$(VERSION)"
 	mkdir -p "slstatus-$(VERSION)/components"
 	cp -R LICENSE Makefile README config.mk config.def.h \
-					arg.h slstatus.c $(COM:=.c) $(REQ:=.c) $(REQ:=.h) \
-					slstatus.1 "slstatus-$(VERSION)"
+	      arg.h slstatus.c $(COM:=.c) $(REQ:=.c) $(REQ:=.h) \
+	      slstatus.1 "slstatus-$(VERSION)"
 	tar -cf - "slstatus-$(VERSION)" | gzip -c > "slstatus-$(VERSION).tar.gz"
 	rm -rf "slstatus-$(VERSION)"
 
