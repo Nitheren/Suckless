@@ -65,7 +65,8 @@ static const struct arg args[] = {
 	/* function format          argument */
 	{ battery_state,"[B:%s",	NULL },
 	{ battery_perc, "%s]",		NULL },
-	{ ram_used, 		"[%s]", 	NULL },
+	{ netspeed_rx,	"[Ns:%s]",	"iwm0" },
+	{ ram_used, 		"[R:%s]", 	NULL },
 	{ cpu_perc, 		"[C:%s]",		NULL },
 	{ vol_perc, 		"[V:%s]",	"/dev/mixer" },
 	{ wifi_essid,		"[%s]",		"iwm0" },	
