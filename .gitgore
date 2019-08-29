@@ -1,0 +1,13 @@
+*.o*
+
+*.o
+*.out
+*.bak
+*.cache
+*.tmp
+*.temp
+*.rej
+*.orig
+*__pycache__
+*TODO*
+*FAQ*
