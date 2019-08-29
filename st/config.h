@@ -6,7 +6,8 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 //static char *font = "IBMPlexMono-Regular:pixelsize=14:antialias=true:autohint=true";
-static char *font = "terminus:pixelsize=14:antialias=true:autohint=true";
+//static char *font = "monospace:pixelsize=12:antialias=true:autohint=true";
+static char *font = "xos4 terminus:pixelsize=14:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
@@ -88,6 +89,7 @@ unsigned int tabspaces = 8;
 //#include "themes/default.h"
 #include "themes/gentoo.h"
 //#include "themes/pink.h"
+//#include "themes/mono.h"
 
 /*
  * Default shape of cursor
