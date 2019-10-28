@@ -6,8 +6,8 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 //static char *font = "IBMPlexMono-Regular:pixelsize=14:antialias=true:autohint=true";
-//static char *font = "monospace:pixelsize=12:antialias=true:autohint=true";
-static char *font = "xos4 terminus:pixelsize=14:antialias=true:autohint=true";
+static char *font = "monospace:pixelsize=15:antialias=true:autohint=true";
+//static char *font = "xos4 terminus:pixelsize=14:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
