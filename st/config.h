@@ -5,10 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-//static char *font = "IBMPlexMono-Regular:pixelsize=14:antialias=true:autohint=true";
-static char *font = "monospace:pixelsize=15:antialias=true:autohint=true";
-//static char *font = "xos4 terminus:pixelsize=14:antialias=true:autohint=true";
-static int borderpx = 2;
+static char *font = "monospace:pixelsize=16:antialias=true:autohint=true";
+static int borderpx = 22;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -85,9 +83,9 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* Terminal colors (16 first used in escape sequence) */
-//#include "themes/light-theme.h"
+#include "themes/light-theme.h"
 //#include "themes/default.h"
-#include "themes/gentoo.h"
+//#include "themes/gentoo.h"
 //#include "themes/pink.h"
 //#include "themes/mono.h"
 
