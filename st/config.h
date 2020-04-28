@@ -85,9 +85,10 @@ unsigned int tabspaces = 8;
 /* Terminal colors (16 first used in escape sequence) */
 #include "themes/light-theme.h"
 //#include "themes/default.h"
-//#include "themes/gentoo.h"
-//#include "themes/pink.h"
-//#include "themes/mono.h"
+//#include "themes/fishbone.h"
+//#include "themes/chalk.light.h"
+//#include "themes/eighties.light.h"
+//#include "themes/google.light.h"
 
 /*
  * Default shape of cursor
@@ -154,7 +155,7 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
 	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
 	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
-	
+
 };
 
 /*
@@ -434,6 +435,6 @@ static uint selmasks[] = {
  * of single wide characters.
  */
 static char ascii_printable[] =
-	" !\"#$%&'()*+,-./0123456789:;<=>?"
-	"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
-	"`abcdefghijklmnopqrstuvwxyz{|}~";
+" !\"#$%&'()*+,-./0123456789:;<=>?"
+"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
+"`abcdefghijklmnopqrstuvwxyz{|}~";
