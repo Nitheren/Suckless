@@ -12,9 +12,9 @@ static const char unknown_str[] = "n/a";
 static const struct arg args[] = {
 	/* function format          argument */
 	{ keyboard_indicators, 	" %s ",	"c?m?" },
-	{ battery_state,"ac/%s",	"NULL" },
-	{ battery_perc, "%s%%",	"NULL" },
-	{ vol_perc,	" vol/%s%% ", "/dev/mixer" },
-	{ wifi_essid, 	" %s ",	"iwm0" },
+	{ temp, 	" %s°C ",	"/sys/class/thermal/thermal_zone0/temp" },
+	{ battery_state,	"ac/%s","BAT0" },
+	{ battery_perc, 	"%s%%",	"BAT0" },
+	{ wifi_essid, 	" %s ",	"wlp3s0" },
 	{ datetime, 	" %s ",	"%a %b %e %H:%M" },
 };
