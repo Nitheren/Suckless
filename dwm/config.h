@@ -1,11 +1,13 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;   /* border pixel of windows */
-static const unsigned int snap      = 0;   /* snap pixel */
-static const int showbar            = 1;   /* 0 means no bar */
-static const unsigned int gappx     = 5;   /* gap pixel between windows */
-static const int topbar             = 1;   /* 0 means bottom bar */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int snap      = 0;       /* snap pixel */
+static const int showbar            = 1;        /* 0 means no bar */
+static const unsigned int gappx	    = 5;
+static const int topbar             = 1;        /* 0 means bottom bar */
+static const int vertpad	    = 5;	
+static const int sidepad	    = 5;
 static const char *fonts[]          = { "monospace:size=12" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
@@ -13,15 +15,19 @@ static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_gray5[]	    = "#444444";
-static const char col_cyan[]        = "#005577";
-static const char col_blue[]	    = "#5b6982";
 static const char col_black[]	    = "#000000";
 static const char col_white[]	    = "#ffffff";
-static const char col_white2[]	    = "#d9d5ba";
+static const char col_cyan[]        = "#005577";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_white, col_black, col_gray5 },
 	[SchemeSel]  = { col_white, col_black,  col_gray5 },
+	[SchemeStatus]  = { col_white, col_black,  "#ffffff"  }, // Statusbar right {text,background,not used but cannot be empty}
+	[SchemeTagsSel]  = { col_black, col_white,  "#ffffff"  }, // Tagbar left selected {text,background,not used but cannot be empty}
+    	[SchemeTagsNorm]  = { col_white, col_black,  "#ffffff"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
+    	[SchemeInfoSel]  = { col_white, col_black,  "#ffffff"  }, // infobar middle  selected {text,background,not used but cannot be empty}
+    	[SchemeInfoNorm]  = { col_white, col_black,  "#ffffff"  }, // infobar middle  unselected {text,background,not used but cannot be empty}
+
 };
 
 /* tagging */
@@ -57,10 +63,10 @@ static const Layout layouts[] = {
 #define XF86AudioRaiseVolume		0x1008ff13
 #define MODKEY Mod1Mask
 #define TAGKEYS(KEY,TAG) \
-{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
-{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
+	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
@@ -71,15 +77,14 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 static const char *cmdbrightnessup[]  = { "xbacklight", "-inc", "5", NULL };
 static const char *cmdbrightnessdown[]  = { "xbacklight", "-dec", "5", NULL };
-static const char *cmdsoundup[]  = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+1000", NULL };
-static const char *cmdsounddown[]  = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-1000",  NULL };
-static const char *cmdsoundtoggle[]  = { "pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle",  NULL };
-static const char *surfcmd[] = {"tabbed","-c","surf","-e", NULL};
+static const char *cmdsoundup[]  = { "amixer", "sset","Master", "playback", "10+", NULL };
+static const char *cmdsounddown[]  = { "amixer", "sset","Master", "playback", "10-", NULL };
+static const char *cmdsoundtoggle[]  = {"amixer", "sset","Master", "playback", "toggle", NULL };
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,			XK_w,	   spawn,	   {.v = surfcmd } }, 
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -90,11 +95,6 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
-	{ 0,                            XF86MonBrightnessDown,     spawn, {.v = cmdbrightnessdown } },
-	{ 0,                            XF86MonBrightnessUp,       spawn, {.v = cmdbrightnessup } },
-	{ 0,                            XF86AudioMute,             spawn, {.v = cmdsoundtoggle } },
-	{ 0,                            XF86AudioRaiseVolume,      spawn, {.v = cmdsoundup } },
-	{ 0,                            XF86AudioLowerVolume,      spawn, {.v = cmdsounddown } },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -106,16 +106,21 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ 0,                            XF86MonBrightnessDown,     spawn, {.v = cmdbrightnessdown } },
+	{ 0,                            XF86MonBrightnessUp,       spawn, {.v = cmdbrightnessup } },
+	{ 0,                            XF86AudioMute,             spawn, {.v = cmdsoundtoggle } },
+	{ 0,                            XF86AudioRaiseVolume,      spawn, {.v = cmdsoundup } },
+	{ 0,                            XF86AudioLowerVolume,      spawn, {.v = cmdsounddown } },
 	TAGKEYS(                        XK_1,                      0)
-		TAGKEYS(                        XK_2,                      1)
-		TAGKEYS(                        XK_3,                      2)
-		TAGKEYS(                        XK_4,                      3)
-		TAGKEYS(                        XK_5,                      4)
-		TAGKEYS(                        XK_6,                      5)
-		TAGKEYS(                        XK_7,                      6)
-		TAGKEYS(                        XK_8,                      7)
-		TAGKEYS(                        XK_9,                      8)
-		{ MODKEY|ShiftMask,             XK_Escape,      quit,           {0} },
+	TAGKEYS(                        XK_2,                      1)
+	TAGKEYS(                        XK_3,                      2)
+	TAGKEYS(                        XK_4,                      3)
+	TAGKEYS(                        XK_5,                      4)
+	TAGKEYS(                        XK_6,                      5)
+	TAGKEYS(                        XK_7,                      6)
+	TAGKEYS(                        XK_8,                      7)
+	TAGKEYS(                        XK_9,                      8)
+	{ MODKEY|ShiftMask,             XK_Escape,      quit,           {0} },
 };
 
 /* button definitions */
@@ -124,6 +129,7 @@ static Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
+	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
@@ -133,3 +139,4 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
+
