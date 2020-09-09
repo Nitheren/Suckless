@@ -6,10 +6,10 @@ static const unsigned int snap      = 0;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const unsigned int gappx	    = 5;
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int vertpad	    = 5;	
-static const int sidepad	    = 5;
+static const int vertpad	    	= 5;	
+static const int sidepad	    	= 5;
 static const char *fonts[]          = { "monospace:size=12" };
-static const char dmenufont[]       = "monospace:size=10";
+static const char dmenufont[]       = "monospace:size=13";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -24,9 +24,9 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_white, col_black,  col_gray5 },
 	[SchemeStatus]  = { col_white, col_black,  "#ffffff"  }, // Statusbar right {text,background,not used but cannot be empty}
 	[SchemeTagsSel]  = { col_black, col_white,  "#ffffff"  }, // Tagbar left selected {text,background,not used but cannot be empty}
-    	[SchemeTagsNorm]  = { col_white, col_black,  "#ffffff"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
-    	[SchemeInfoSel]  = { col_white, col_black,  "#ffffff"  }, // infobar middle  selected {text,background,not used but cannot be empty}
-    	[SchemeInfoNorm]  = { col_white, col_black,  "#ffffff"  }, // infobar middle  unselected {text,background,not used but cannot be empty}
+   	[SchemeTagsNorm]  = { col_white, col_black,  "#ffffff"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
+   	[SchemeInfoSel]  = { col_white, col_black,  "#ffffff"  }, // infobar middle  selected {text,background,not used but cannot be empty}
+   	[SchemeInfoNorm]  = { col_white, col_black,  "#ffffff"  }, // infobar middle  unselected {text,background,not used but cannot be empty}
 
 };
 
@@ -75,8 +75,8 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_black, "-nf", col_white, "-sb", col_white, "-sf", col_black, NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *cmdbrightnessup[]  = { "xbacklight", "-inc", "5", NULL };
-static const char *cmdbrightnessdown[]  = { "xbacklight", "-dec", "5", NULL };
+static const char *cmdbrightnessup[]  = { "backlight", "-inc", "10", NULL };
+static const char *cmdbrightnessdown[]  = { "backlight", "-dec", "10", NULL };
 static const char *cmdsoundup[]  = { "amixer", "sset","Master", "playback", "10+", NULL };
 static const char *cmdsounddown[]  = { "amixer", "sset","Master", "playback", "10-", NULL };
 static const char *cmdsoundtoggle[]  = {"amixer", "sset","Master", "playback", "toggle", NULL };
@@ -88,11 +88,11 @@ static Key keys[] = {
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
@@ -129,7 +129,6 @@ static Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
