@@ -7,6 +7,10 @@
  */
 static char *font = "monospace:pixelsize=16:antialias=true:autohint=true";
 static int borderpx = 22;
+/* Spare fonts */
+static char *font2[] = {
+"Symbola:pixelsize=16:antialias=true:autohint=true"
+};
 
 /*
  * What program is execed by st depends of these precedence rules:
