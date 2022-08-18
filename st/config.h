@@ -5,7 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "monospace:pixelsize=16:antialias=true:autohint=true";
+//static char *font = "monospace:pixelsize=18:antialias=true:autohint=true";
+static char *font = "LucidaTypewriter:pixelsize=18:antialias=false:autohint=false";
 static int borderpx = 22;
 /* Spare fonts */
 static char *font2[] = {
@@ -87,12 +88,8 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* Terminal colors (16 first used in escape sequence) */
-#include "themes/light-theme.h"
 //#include "themes/default.h"
-//#include "themes/fishbone.h"
-//#include "themes/chalk.light.h"
-//#include "themes/eighties.light.h"
-//#include "themes/google.light.h"
+#include "themes/3024-light.h"
 
 /*
  * Default shape of cursor
@@ -101,7 +98,7 @@ unsigned int tabspaces = 8;
  * 6: Bar ("|")
  * 7: Snowman ("☃")
  */
-static unsigned int cursorshape = 2;
+static unsigned int cursorshape = 6;
 
 /*
  * Default columns and rows numbers

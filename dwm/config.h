@@ -1,15 +1,15 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 5;        /* border pixel of windows */
+static const unsigned int gappx	    = 10;
 static const unsigned int snap      = 0;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
-static const unsigned int gappx	    = 5;
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int vertpad	    	= 5;	
-static const int sidepad	    	= 5;
-static const char *fonts[]          = { "monospace:size=12" };
-static const char dmenufont[]       = "monospace:size=13";
+static const int vertpad    	    = 5;	
+static const int sidepad    	    = 25;
+static const char *fonts[]          = { "LucidaTypewriter:size=10" };
+static const char dmenufont[]       = "LucidaTypewriter:size=10";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -18,10 +18,12 @@ static const char col_gray5[]	    = "#444444";
 static const char col_black[]	    = "#000000";
 static const char col_white[]	    = "#ffffff";
 static const char col_cyan[]        = "#005577";
+static const char col_green[]	    = "#69825b";
+static const char col_purple[]	    = "#6760ae";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_white, col_black, col_gray5 },
-	[SchemeSel]  = { col_white, col_black,  col_gray5 },
+	[SchemeNorm] = { col_white, col_black, col_black},
+	[SchemeSel]  = { col_white, col_black,  col_black},
 	[SchemeStatus]  = { col_white, col_black,  "#ffffff"  }, // Statusbar right {text,background,not used but cannot be empty}
 	[SchemeTagsSel]  = { col_black, col_white,  "#ffffff"  }, // Tagbar left selected {text,background,not used but cannot be empty}
    	[SchemeTagsNorm]  = { col_white, col_black,  "#ffffff"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
@@ -90,7 +92,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+	{ MODKEY|ShiftMask,                       XK_i,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
